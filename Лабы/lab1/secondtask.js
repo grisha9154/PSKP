@@ -13,11 +13,12 @@ fs.open(filePath,'w+',0644,function (err, file_handler) {
             else{
                 console.log('Ошибка при записи');
             }
+            fs.mkdir(process.argv[2]+'\\summary');
         })
     }
     else{
         console.log('Ошибка открытия файла');
     }
-})
+});
 
 console.log(filePath);
