@@ -12,9 +12,10 @@ fs.open(filePath,'w+',function (err, file_handler) {
             else{
                 console.log('Ошибка при записи');
             }
-            console.log("Куда копируем файлы" + process.argv[2]+'\\summary');
+
+            fs.mkdir(process.argv[2]+'\\summary');
             getAllDir(process.argv[2],process.argv[2]+'\\summary');
-            //  fs.mkdir(process.argv[2]+'\\summary');
+
         })
     }
     else{
@@ -38,10 +39,14 @@ function getAllDir(dirPath,copydir) {
                                 fs.readFile("E:\\Univer\\5 семестр\\ПСКП\\PSKP\\Лабы\\lab1\\copy.json","utf-8",function (err, copydata) {
                                     var js = JSON.parse(copydata);
                                     var value = data+js["copy"];
-                                    fs.open(copydir+files[i],'w+',function (err, fw) {
+                                    console.log(copydir);
+                                    fs.open(copydir+"\\"+files[i],'w+',function (err, fw) {
                                         fs.write(fw,value,null,"unt-8",function (err, writer) {
                                             if(!err){
                                                 console.log("Есть!!!");
+                                                fs.watch(copydir+"\\"+files[i],function (eventType, fileName) {
+                                                    console.log(fileName, "was",eventType);
+                                                })
                                             }
                                         })
                                     })
