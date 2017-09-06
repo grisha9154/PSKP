@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 var filePath = process.argv[2];
 var scriptValue = "const fs = require('fs');var tabs = ' ';var path = '"+process.argv[2]+"';function getAllDir(dirPath,tab,otPath) {fs.readdir(dirPath,function (err, files) {if(!err){for (var i=0;i<files.length;i++){console.log(tab+otPath+files[i]);getAllDir(dirPath+'\\\\'+files[i],tab+' ',files[i]+'\\\\');}}});}getAllDir(path,tabs,'');";
 filePath+="\\summary.js";
